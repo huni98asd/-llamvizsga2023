@@ -8,6 +8,19 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 {
     public Image image;
     [HideInInspector] public Transform parentAfterDrag;
+
+    public enum ItemType
+    {
+        Right,
+        Left,
+        Jump
+    }
+
+    void SelectMovement()
+    {
+       
+    }
+
     public void OnBeginDrag(PointerEventData eventData)
     {
         Debug.Log("OnBeginDrag");
@@ -15,12 +28,14 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         transform.SetParent(transform.root);
         transform.SetAsLastSibling();
         image.raycastTarget = false;
+
     }
 
     public void OnDrag(PointerEventData eventData)
     {
         Debug.Log("Dragging");
         transform.position = Input.mousePosition;
+
     }
 
     public void OnEndDrag(PointerEventData eventData)

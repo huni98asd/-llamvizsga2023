@@ -12,6 +12,8 @@ public class Caracter : MonoBehaviour
     private float dirX;
     private bool facingRight = true;
     private Vector3 localScale;
+    private DraggableItem draggable;
+
 
     private Inventory inventory;
 
@@ -42,6 +44,7 @@ public class Caracter : MonoBehaviour
 
         if (Mathf.Abs(dirX) > 0 && rb.velocity.y == 0)
             anim.SetBool("isRuning", true);
+            
         else
             anim.SetBool("isRuning", false);
 
