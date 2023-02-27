@@ -3,18 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class ItemSlot : MonoBehaviour,IDropHandler
+public class ItemSlot : MonoBehaviour, IDropHandler
 {
-    
     public void OnDrop(PointerEventData eventData)
     {
-        Debug.Log("OnDrop");
-        if(eventData.pointerDrag != null)
+        if (transform.childCount == 0)
         {
-            eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition = GetComponent<RectTransform>().anchoredPosition;
+            GameObject dropped = eventData.pointerDrag;
+            DraggableItem draggableItem = dropped.GetComponent<DraggableItem>();
+            draggableItem.parentAfterDrag = transform;
         }
     }
-
-     
 
 }

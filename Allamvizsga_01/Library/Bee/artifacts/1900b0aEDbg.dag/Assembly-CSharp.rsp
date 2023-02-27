@@ -386,6 +386,7 @@
 "Assets/InventorySlot.cs"
 "Assets/Item.cs"
 "Assets/ItemAssets.cs"
+"Assets/ItemHolder.cs"
 "Assets/ItemSlot.cs"
 "Assets/LevelSelector.cs"
 "Assets/PlayerMovemet.cs"
