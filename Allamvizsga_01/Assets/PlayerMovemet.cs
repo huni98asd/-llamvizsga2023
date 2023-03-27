@@ -5,33 +5,59 @@ using UnityEngine;
 public class PlayerMovemet : MonoBehaviour
 {
 
-    public CharacterController2D controller;
+    /* public CharacterController2D controller;
 
-    float runSpeed = 40f;
-    float horizontalMove = 0f;
-    bool jump = false;
+     float runSpeed = 40f;
+     float horizontalMove = 0f;
+    // bool jump = false;
 
-    // Start is called before the first frame update
-    void Start()
+     // Start is called before the first frame update
+     void Start()
+     {
+
+     }
+
+     // Update is called once per frame
+     void Update()
+     {
+
+         horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
+
+         if (Input.GetButtonDown("Jump"))
+         {
+             //jump = true;
+         }
+     }
+
+     *//*private void FixedUpdate()
+     {
+         controller.Move(horizontalMove * Time.fixedDeltaTime, false,jump);
+         jump = false;
+     }*/
+
+    [SerializeField] private float speed;
+    private Rigidbody2D body;
+    private InventorySlot InventorySlot;
+
+
+    private void Awake()
     {
-        
+        body = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
+        body.velocity = new Vector2(Input.GetAxis("Horizontal") * speed, body.velocity.y);
 
-        horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
-
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetKey(KeyCode.Space))
         {
-            jump = true;
+            body.velocity = new Vector2(body.velocity.x, speed);
+        }
+
+        if(InventorySlot != null)
+        {
+            Debug.Log("KKSDKSAD");
         }
     }
 
-    private void FixedUpdate()
-    {
-        controller.Move(horizontalMove * Time.fixedDeltaTime, false,jump);
-        jump = false;
-    }
 }
