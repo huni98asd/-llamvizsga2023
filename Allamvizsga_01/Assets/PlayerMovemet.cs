@@ -5,17 +5,12 @@ using UnityEngine;
 public class PlayerMovemet : MonoBehaviour
 {
 
-    /* public CharacterController2D controller;
+     public CharacterController2D controller;
 
      float runSpeed = 40f;
      float horizontalMove = 0f;
-    // bool jump = false;
+     bool jump = false;
 
-     // Start is called before the first frame update
-     void Start()
-     {
-
-     }
 
      // Update is called once per frame
      void Update()
@@ -25,27 +20,29 @@ public class PlayerMovemet : MonoBehaviour
 
          if (Input.GetButtonDown("Jump"))
          {
-             //jump = true;
+             jump = true;
          }
      }
 
-     *//*private void FixedUpdate()
+     private void FixedUpdate()
      {
          controller.Move(horizontalMove * Time.fixedDeltaTime, false,jump);
          jump = false;
-     }*/
+     }
 
     [SerializeField] private float speed;
-    private Rigidbody2D body;
-    private InventorySlot InventorySlot;
+    //private Rigidbody2D body;
+    //private InventorySlot InventorySlot;
 
 
     private void Awake()
     {
-        body = GetComponent<Rigidbody2D>();
+        //body = GetComponent<Rigidbody2D>();
     }
 
-    private void Update()
+
+
+    /*private void Update()
     {
         body.velocity = new Vector2(Input.GetAxis("Horizontal") * speed, body.velocity.y);
 
@@ -54,10 +51,10 @@ public class PlayerMovemet : MonoBehaviour
             body.velocity = new Vector2(body.velocity.x, speed);
         }
 
-        if(InventorySlot != null)
+       *//* if(InventorySlot != null)
         {
             Debug.Log("KKSDKSAD");
-        }
-    }
+        }*//*
+    }*/
 
 }

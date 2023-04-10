@@ -6,15 +6,14 @@ using UnityEngine.EventSystems;
 
 public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-   
-    
-    public string itemName;
 
     [Header("UI")]
     public Image image;
 
+    [HideInInspector ]public Item item;
     [HideInInspector] public Transform parentAfterDrag;
-    [HideInInspector] public Item item;
+    // [HideInInspector] public Item item;
+
 
     public void InitialItem(Item newItem)
     {
@@ -25,7 +24,7 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     public void OnBeginDrag(PointerEventData eventData)
     {
         Debug.Log("OnBeginDrag");
-        Debug.Log(image.sprite.name);
+        //Debug.Log(image.sprite.name);
         image.raycastTarget = false;
         parentAfterDrag = transform.parent;
         transform.SetParent(transform.root);
@@ -42,10 +41,9 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     public void OnEndDrag(PointerEventData eventData)
     {   
         Debug.Log("End drag");
-        itemName = image.sprite.name;
+        //itemName = image.sprite.name;
+        image.raycastTarget = true;
         transform.SetParent(parentAfterDrag);
-        image.raycastTarget = true; 
     }
-
 
 }

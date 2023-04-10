@@ -11,9 +11,9 @@ public class Inventory: MonoBehaviour
     {
         itemList = new List<Item>();
 
-        AddItem(new Item { itemType = Item.ItemType.Jump, amount = 1 });
-        AddItem(new Item { itemType = Item.ItemType.Left, amount = 1 });
-        AddItem(new Item { itemType = Item.ItemType.Right, amount = 1 });
+        //AddItem(new Item { itemType = Item.ItemType.Jump, amount = 1 });
+        //AddItem(new Item { itemType = Item.ItemType.Left, amount = 1 });
+        //AddItem(new Item { itemType = Item.ItemType.Right, amount = 1 });
 
         Debug.Log(itemList.Count);
     }

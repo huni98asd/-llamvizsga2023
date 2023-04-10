@@ -4,18 +4,32 @@ using UnityEngine;
 
 public class CharacterInventory : MonoBehaviour
 {
-    private List<InventorySlot> inventorySlotList;
+    
+    public InventorySlot[] inventorySlots;
+    public GameObject inventoryItemPrefab;
+   
 
-    public CharacterInventory()
-    {
-        inventorySlotList = new List<InventorySlot>();
-       
-        Debug.Log(inventorySlotList.Count);
-    }
-
-    public void AddItem(ItemSlot item)
+    public bool AddItem(Item item)
     {
         //inventorySlotList.Add(item);
+        for(int i = 0; i< inventorySlots.Length; i++)
+        {
+            InventorySlot slot = inventorySlots[i];
+            DraggableItem draggableItem = slot.GetComponentInChildren<DraggableItem>();
+            if(draggableItem == null)
+            {
+                SpawnItem(item, slot);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    void SpawnItem(Item item, InventorySlot slot)
+    {
+        GameObject newItemGo = Instantiate(inventoryItemPrefab, slot.transform);
+        DraggableItem draggableItem = newItemGo.GetComponent<DraggableItem>();
+        draggableItem.InitialItem(item);
     }
 
    /* public List<ItemSlot> GetItemList()

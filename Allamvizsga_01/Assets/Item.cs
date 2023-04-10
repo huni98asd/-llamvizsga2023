@@ -21,6 +21,20 @@ public class Item : ScriptableObject
 
     [Header("Both")]
     public Sprite image;
+
+    //public ItemType itemType;
+    //public int amount;
+
+   /* public Sprite GetSprite()
+    {
+        switch (itemType)
+        {
+            default:
+            case ItemType.Jump: return ItemAssets.Instance.jumpSprite;
+            case ItemType.Left: return ItemAssets.Instance.goLeftSprite;
+            case ItemType.Right: return ItemAssets.Instance.goRightSprite;
+        }
+    }*/
 }
     public enum ItemType
     {
@@ -31,20 +45,10 @@ public class Item : ScriptableObject
 
     public enum ActionType
     {
-
+        Go_Left,
+        Go_Right,
+        Jump,
     }
 
-   /* public ItemType itemType;
-    public int amount;
+   
 
-    public Sprite GetSprite()
-    {
-        switch (itemType)
-        {
-            default:
-            case ItemType.Jump: return ItemAssets.Instance.jumpSprite;
-            case ItemType.Left: return ItemAssets.Instance.goLeftSprite;
-            case ItemType.Right: return ItemAssets.Instance.goRightSprite;
-        }
-    }
-}*/
