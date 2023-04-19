@@ -7,7 +7,28 @@ public class CharacterInventory : MonoBehaviour
     
     public InventorySlot[] inventorySlots;
     public GameObject inventoryItemPrefab;
-   
+
+    int selectedSlot = -1;
+/*
+    void Start()
+    {
+        ChangeSelectedSlot(0);
+    }
+    void Update()
+    {
+        //if(inventorySlotList != null )
+        // Debug.Log("VAALAMI");
+    }
+
+    void ChangeSelectedSlot(int newValue)
+    {
+        if(selectedSlot >= 0)
+        {
+            inventorySlots[selectedSlot].Deselect();
+        }
+        inventorySlots[newValue].Select();
+        selectedSlot = newValue;
+    }*/
 
     public bool AddItem(Item item)
     {
@@ -32,20 +53,21 @@ public class CharacterInventory : MonoBehaviour
         draggableItem.InitialItem(item);
     }
 
-   /* public List<ItemSlot> GetItemList()
-    {
-        return inventorySlotList;
-    }*/
-    // Start is called before the first frame update
-    void Start()
+    public InventorySlot[] GetSelectedItem()
     {
         
+
+        return inventorySlots;
+       /* InventorySlot slot = inventorySlots[0];
+        DraggableItem draggableItem = slot.GetComponent<DraggableItem>();
+        if (draggableItem != null)
+        {
+       
+            return draggableItem.item;
+        }
+        return null;*/
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        //if(inventorySlotList != null )
-           // Debug.Log("VAALAMI");
-    }
+  
+
 }

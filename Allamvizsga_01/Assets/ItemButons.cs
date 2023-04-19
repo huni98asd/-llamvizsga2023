@@ -19,6 +19,6 @@ public class ItemButons : MonoBehaviour
             Debug.Log("Inventory full");
         }
     }
-
    
+
 }

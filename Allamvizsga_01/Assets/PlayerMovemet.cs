@@ -1,33 +1,73 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovemet : MonoBehaviour
 {
+    public CharacterController2D controller;
+    public CharacterInventory characterInventory;
+    public GameObject inventoryItemPrefab;
 
-     public CharacterController2D controller;
-
-     float runSpeed = 40f;
-     float horizontalMove = 0f;
-     bool jump = false;
+    float runSpeed = 40f;
+    float horizontalMove = 0f;
+    bool jump = false;
 
 
      // Update is called once per frame
      void Update()
      {
+       // DraggableItem draggableItem = GetComponentInChildren<DraggableItem>();
+       // CharacterInventory characterInventory = GetComponentInChildren<CharacterInventory>();
+      ///  InventorySlot inventorySlot  = GetComponentInChildren<InventorySlot>();
+       // horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
 
-         horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
+      
+    }
 
-         if (Input.GetButtonDown("Jump"))
-         {
-             jump = true;
-         }
-     }
+    public void Move()
+    {
+        
+        InventorySlot[] Ditem = characterInventory.GetSelectedItem();
+        for (int i = 0; i < Ditem.Length; i++)
+        {
+            //Thread.Sleep(500);
+            DraggableItem draggableItem = Ditem[i].GetComponentInChildren<DraggableItem>();
+            if (draggableItem.image.sprite.name == "arrowhead-up")
+            {
 
-     private void FixedUpdate()
+                Debug.Log("fel");
+                //Debug.Log(Ditem.image.name);
+                jump = true;
+            }
+            else if (draggableItem.image.sprite.name == "right-arrow")
+            {
+                Debug.Log("jobbra");
+                //Debug.Log(Ditem.image.name);
+                controller.Move(1000 * Time.fixedDeltaTime, false, jump);
+            }
+            else if (draggableItem.image.sprite.name == "left-arrow")
+            {
+                Debug.Log("balra");
+                //Debug.Log(Ditem.image.name);
+                controller.Move(-1000 * Time.fixedDeltaTime, false, jump);
+            }
+            else
+            {
+                Debug.Log("null");
+            }
+            // Thread.Sleep(500);
+            //await Task.Deplay(1000);
+        }
+        
+
+    }
+
+    private void FixedUpdate()
      {
-         controller.Move(horizontalMove * Time.fixedDeltaTime, false,jump);
-         jump = false;
+        controller.Move(horizontalMove * Time.fixedDeltaTime, false,jump);
+        jump = false;
      }
 
     [SerializeField] private float speed;
