@@ -45,13 +45,13 @@ public class PlayerMovemet : MonoBehaviour
             {
                 Debug.Log("jobbra");
                 //Debug.Log(Ditem.image.name);
-                controller.Move(1000 * Time.fixedDeltaTime, false, jump);
+                controller.Move(50, false, jump);
             }
             else if (draggableItem.image.sprite.name == "left-arrow")
             {
                 Debug.Log("balra");
                 //Debug.Log(Ditem.image.name);
-                controller.Move(-1000 * Time.fixedDeltaTime, false, jump);
+                controller.Move(-50, false, jump);
             }
             else
             {
