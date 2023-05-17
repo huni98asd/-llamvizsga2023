@@ -8,6 +8,7 @@ public class PlayerMovemet : MonoBehaviour
 {
     public CharacterController2D controller;
     public CharacterInventory characterInventory;
+    public FunctionInventory functionInventory;
     public GameObject inventoryItemPrefab;
 
     float runSpeed = 40f;
@@ -21,33 +22,66 @@ public class PlayerMovemet : MonoBehaviour
        // DraggableItem draggableItem = GetComponentInChildren<DraggableItem>();
        // CharacterInventory characterInventory = GetComponentInChildren<CharacterInventory>();
       ///  InventorySlot inventorySlot  = GetComponentInChildren<InventorySlot>();
-       // horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
-
+       // horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed
       
     }
 
     public void Move()
     {
         
-        InventorySlot[] Ditem = characterInventory.GetSelectedItem();
-        for (int i = 0; i < Ditem.Length; i++)
+        InventorySlot[] mainInventory_item = characterInventory.GetSelectedItem();
+        InventorySlot[] functionInventory_item = functionInventory.GetSelectedItem();
+        for (int i = 0; i < mainInventory_item.Length; i++)
         {
             //Thread.Sleep(500);
-            DraggableItem draggableItem = Ditem[i].GetComponentInChildren<DraggableItem>();
-            if (draggableItem.image.sprite.name == "arrowhead-up")
+            DraggableItem main_draggableItem = mainInventory_item[i].GetComponentInChildren<DraggableItem>();
+            
+            if (main_draggableItem.image.sprite.name == "function")
+            {
+                Debug.Log("Fugeveny hivas");
+                for (int j = 0; j < functionInventory_item.Length; j++)
+                {
+
+                    DraggableItem function_draggableItem = functionInventory_item[j].GetComponentInChildren<DraggableItem>();
+                    if (function_draggableItem.image.sprite.name == "arrowhead-up")
+                    {
+                        Debug.Log("fel");
+                        //Debug.Log(Ditem.image.name);
+                        jump = true;
+                    }
+                    else if (function_draggableItem.image.sprite.name == "right-arrow")
+                    {
+                        Debug.Log("jobbra");
+                        //Debug.Log(Ditem.image.name);
+                        controller.Move(50, false, jump);
+                    }
+                    else if (function_draggableItem.image.sprite.name == "left-arrow")
+                    {
+                        Debug.Log("balra");
+                        //Debug.Log(Ditem.image.name);
+                        controller.Move(-50, false, jump);
+                    }
+                    else
+                    {
+                        Debug.Log("null");
+                    }
+                }
+            }
+
+            else if (main_draggableItem.image.sprite.name == "arrowhead-up")
             {
 
                 Debug.Log("fel");
                 //Debug.Log(Ditem.image.name);
                 jump = true;
             }
-            else if (draggableItem.image.sprite.name == "right-arrow")
+            else if (main_draggableItem.image.sprite.name == "right-arrow")
             {
                 Debug.Log("jobbra");
                 //Debug.Log(Ditem.image.name);
                 controller.Move(50, false, jump);
             }
-            else if (draggableItem.image.sprite.name == "left-arrow")
+            else if (main_draggableItem.image.sprite.name == "left-arrow")
             {
                 Debug.Log("balra");
                 //Debug.Log(Ditem.image.name);

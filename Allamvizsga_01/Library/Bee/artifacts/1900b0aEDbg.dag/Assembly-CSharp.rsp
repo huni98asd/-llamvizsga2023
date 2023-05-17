@@ -383,6 +383,7 @@
 "Assets/CharacterController2D.cs"
 "Assets/CharacterInventory.cs"
 "Assets/DraggableItem.cs"
+"Assets/FunctionInventory.cs"
 "Assets/Inventory.cs"
 "Assets/InventorySlot.cs"
 "Assets/Item.cs"
