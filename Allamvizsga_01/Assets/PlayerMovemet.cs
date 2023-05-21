@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Threading.Tasks;
 
 public class PlayerMovemet : MonoBehaviour
 {
@@ -26,14 +27,13 @@ public class PlayerMovemet : MonoBehaviour
       
     }
 
-    public void Move()
+    async public void Move()
     {
         
         InventorySlot[] mainInventory_item = characterInventory.GetSelectedItem();
         InventorySlot[] functionInventory_item = functionInventory.GetSelectedItem();
         for (int i = 0; i < mainInventory_item.Length; i++)
         {
-            //Thread.Sleep(500);
             DraggableItem main_draggableItem = mainInventory_item[i].GetComponentInChildren<DraggableItem>();
             
             if (main_draggableItem.image.sprite.name == "function")
@@ -53,13 +53,14 @@ public class PlayerMovemet : MonoBehaviour
                     {
                         Debug.Log("jobbra");
                         //Debug.Log(Ditem.image.name);
-                        controller.Move(50, false, jump);
+                        controller.Move(75 * Time.fixedDeltaTime, false, jump);
+                        //Vector2 targetPosition = new Vector2()
                     }
                     else if (function_draggableItem.image.sprite.name == "left-arrow")
                     {
                         Debug.Log("balra");
                         //Debug.Log(Ditem.image.name);
-                        controller.Move(-50, false, jump);
+                        controller.Move(-75 * Time.fixedDeltaTime, false, jump);
                     }
                     else
                     {
@@ -79,20 +80,21 @@ public class PlayerMovemet : MonoBehaviour
             {
                 Debug.Log("jobbra");
                 //Debug.Log(Ditem.image.name);
-                controller.Move(50, false, jump);
+                controller.Move(750 * Time.fixedDeltaTime, true, jump);
+               
             }
             else if (main_draggableItem.image.sprite.name == "left-arrow")
             {
                 Debug.Log("balra");
                 //Debug.Log(Ditem.image.name);
-                controller.Move(-50, false, jump);
+                controller.Move(-750 * Time.fixedDeltaTime, false, jump);
             }
             else
             {
                 Debug.Log("null");
             }
-            // Thread.Sleep(500);
-            //await Task.Deplay(1000);
+            
+            await Task.Delay(1000);
         }
         
 

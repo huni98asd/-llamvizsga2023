@@ -41,7 +41,8 @@ public class Item : ScriptableObject
         Right,
         Left,
         Jump,
-        Function
+        Function1,
+        Function2
     }
 
     public enum ActionType
@@ -49,7 +50,8 @@ public class Item : ScriptableObject
         Go_Left,
         Go_Right,
         Jump,
-        Add_Function
+        Add_Function1,
+        Add_Function2
 }
 
    
