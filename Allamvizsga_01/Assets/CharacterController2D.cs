@@ -2,10 +2,11 @@ using UnityEngine;
 using UnityEngine.Events;
 
 public class CharacterController2D : MonoBehaviour
-{
-	[SerializeField] private float m_JumpForce = 400f;							
-	[Range(0, 1)] [SerializeField] private float m_CrouchSpeed = .100f;			
-	[Range(0, .3f)] [SerializeField] private float m_MovementSmoothing = .05f;	
+{					
+	[SerializeField] private float m_firstPositionX = 180f;	
+	[SerializeField] private float m_firstPositionY = 100f;	
+	[SerializeField] private float m_movmentX = 100f;
+	[SerializeField] private float m_movmentY = 100f;
 	[SerializeField] private bool m_AirControl = false;							
 	[SerializeField] private LayerMask m_WhatIsGround;							
 	[SerializeField] private Transform m_GroundCheck;							
@@ -17,7 +18,8 @@ public class CharacterController2D : MonoBehaviour
 	const float k_CeilingRadius = .2f; 
 	private Rigidbody2D m_Rigidbody2D;
 	private bool m_FacingRight = true;  
-	private Vector3 m_Velocity = Vector3.zero;
+	
+
 
 	[Header("Events")]
 	[Space]
@@ -58,21 +60,21 @@ public class CharacterController2D : MonoBehaviour
 		}
 	}
 
-	float x = 180f;
-	public void Move(float move, bool crouch, bool jump)
+	
+	public void Move(bool right, bool down, bool jump)
 	{
-		if (!crouch)
+		if (!down)
 		{
 			if (Physics2D.OverlapCircle(m_CeilingCheck.position, k_CeilingRadius, m_WhatIsGround))
 			{
-				crouch = true;
+				down = true;
 			}
 		}
 
 		if (m_Grounded || m_AirControl)
 		{
 
-			if (crouch)
+			if (down)
 			{
 				if (!m_wasCrouching)
 				{
@@ -80,7 +82,7 @@ public class CharacterController2D : MonoBehaviour
 					OnCrouchEvent.Invoke(true);
 				}
 
-				move *= m_CrouchSpeed;
+				
 
 				if (m_CrouchDisableCollider != null)
 					m_CrouchDisableCollider.enabled = false;
@@ -96,29 +98,45 @@ public class CharacterController2D : MonoBehaviour
 				}
 			}
 		
-			Vector3 targetVelocity = new Vector2(move * 100f, m_Rigidbody2D.velocity.y);
+			//Vector3 targetVelocity = new Vector2(move * 100f, m_Rigidbody2D.velocity.y);
 			
-			if (crouch == true)
+			if (right == true)
 			{
-				m_Rigidbody2D.position = new Vector2(x, 100f);
-				x = x + 75;
+				m_firstPositionX = m_firstPositionX + m_movmentX;
+				m_Rigidbody2D.position = new Vector2(m_firstPositionX, m_firstPositionY);
+				
 			};
-			
-			if (move > 0 && !m_FacingRight)
+
+			if (jump == true)
+			{
+				m_firstPositionX = m_firstPositionX + m_movmentX;
+				m_firstPositionY = m_firstPositionY + m_movmentY;
+				m_Rigidbody2D.position = new Vector2(m_firstPositionX, m_firstPositionY);
+				
+			};
+
+			if (down == true)
+			{
+				m_firstPositionX = m_firstPositionX + m_movmentX;
+				m_firstPositionY = m_firstPositionY - m_movmentY;
+				m_Rigidbody2D.position = new Vector2(m_firstPositionX, m_firstPositionY);
+				
+			};
+
+			if (right == true && !m_FacingRight)
 			{
 				Flip();
 			}
 			
-			else if (move < 0 && m_FacingRight)
-			{	
-				Flip();
-			}
+			
 		}
 		
 		if (m_Grounded && jump)
 		{
 			m_Grounded = false;
-			m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
+			//m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
+			//m_Rigidbody2D.position = new Vector2(m_firstPositionX, m_firstPositionY);
+			//m_firstPositionY = m_firstPositionY + m_movmentY;
 		}
 	}
 

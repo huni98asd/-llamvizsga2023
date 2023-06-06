@@ -4,6 +4,7 @@ using System.Threading;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Threading.Tasks;
+using UnityEngine.UI;
 
 public class PlayerMovemet : MonoBehaviour
 {
@@ -11,14 +12,14 @@ public class PlayerMovemet : MonoBehaviour
     public CharacterInventory characterInventory;
     public FunctionInventory functionInventory;
     public GameObject inventoryItemPrefab;
-
-    float runSpeed = 40f;
-    float horizontalMove = 0f;
-    bool jump = false;
-
+    public InputField variableI;
+    public InputField compareI;
+    public InputField operationI;
+    
+   
 
      // Update is called once per frame
-     void Update()
+    void Update()
      {
        // DraggableItem draggableItem = GetComponentInChildren<DraggableItem>();
        // CharacterInventory characterInventory = GetComponentInChildren<CharacterInventory>();
@@ -27,45 +28,126 @@ public class PlayerMovemet : MonoBehaviour
       
     }
 
+
     async public void Move()
     {
         
         InventorySlot[] mainInventory_item = characterInventory.GetSelectedItem();
-        InventorySlot[] functionInventory_item = functionInventory.GetSelectedItem();
+        InventorySlot[] functionInventory_item1 = functionInventory.GetSelectedItem();
+        InventorySlot[] functionInventory_item2 = functionInventory.GetSelectedItem2();
+
         for (int i = 0; i < mainInventory_item.Length; i++)
         {
             DraggableItem main_draggableItem = mainInventory_item[i].GetComponentInChildren<DraggableItem>();
             
-            if (main_draggableItem.image.sprite.name == "function")
+            if (main_draggableItem.image.sprite.name == "f1")
             {
                 Debug.Log("Fugeveny hivas");
-                for (int j = 0; j < functionInventory_item.Length; j++)
+                for (int j = 0; j < functionInventory_item1.Length; j++)
                 {
 
-                    DraggableItem function_draggableItem = functionInventory_item[j].GetComponentInChildren<DraggableItem>();
+                    DraggableItem function_draggableItem = functionInventory_item1[j].GetComponentInChildren<DraggableItem>();
+                    Debug.Log(function_draggableItem.image.sprite.name);
                     if (function_draggableItem.image.sprite.name == "arrowhead-up")
                     {
                         Debug.Log("fel");
                         //Debug.Log(Ditem.image.name);
-                        jump = true;
+                        controller.Move(false, false, true);
                     }
                     else if (function_draggableItem.image.sprite.name == "right-arrow")
                     {
                         Debug.Log("jobbra");
                         //Debug.Log(Ditem.image.name);
-                        controller.Move(75 * Time.fixedDeltaTime, false, jump);
-                        //Vector2 targetPosition = new Vector2()
+                        controller.Move(true, false, false);
                     }
-                    else if (function_draggableItem.image.sprite.name == "left-arrow")
+                    else if (function_draggableItem.image.sprite.name == "down-arrow")
                     {
-                        Debug.Log("balra");
+                        Debug.Log("le");
                         //Debug.Log(Ditem.image.name);
-                        controller.Move(-75 * Time.fixedDeltaTime, false, jump);
+                        controller.Move(false, true, false);
                     }
                     else
                     {
                         Debug.Log("null");
                     }
+                    await Task.Delay(1000);
+                }
+            }
+           
+            else if (main_draggableItem.image.sprite.name == "f2")
+            {
+                Debug.Log("Fugeveny hivas 2");
+                for (int j = 0; j < functionInventory_item2.Length; j++)
+                {
+
+                    DraggableItem function_draggableItem2 = functionInventory_item2[j].GetComponentInChildren<DraggableItem>();
+                    if(functionInventory_item2[j] == null)
+                    {
+                        Debug.Log("ures");
+                    }
+                    Debug.Log(function_draggableItem2.image.sprite.name);
+                    if (function_draggableItem2.image.sprite.name == "arrowhead-up")
+                    {
+                        Debug.Log("fel");
+                        //Debug.Log(Ditem.image.name);
+                        controller.Move(false, false, true);
+                    }
+                    else if (function_draggableItem2.image.sprite.name == "right-arrow")
+                    {
+                        Debug.Log("jobbra");
+                        //Debug.Log(Ditem.image.name);
+                        controller.Move(true, false, false);
+                    }
+                    else if (function_draggableItem2.image.sprite.name == "down-arrow")
+                    {
+                        Debug.Log("le");
+                        //Debug.Log(Ditem.image.name);
+                        controller.Move(false, true, false);
+                    }
+                    else
+                    {
+                        Debug.Log("null");
+                    }
+                    await Task.Delay(1000);
+                }
+            }
+
+            else if (main_draggableItem.image.sprite.name == "cycle")
+            {
+                Debug.Log("Ciklus inditas");
+                for (int j = 0; j < 2; j++)
+                
+                {
+                   
+                    for (int x = 0; x < functionInventory_item1.Length; x++)
+                    {
+                        DraggableItem cycle_draggableItem = functionInventory_item1[x].GetComponentInChildren<DraggableItem>();
+                        if (cycle_draggableItem.image.sprite.name == "arrowhead-up")
+                        {
+
+                            Debug.Log("fel");
+                            //Debug.Log(Ditem.image.name);
+                            controller.Move(false, false, true);
+                        }
+                        else if (cycle_draggableItem.image.sprite.name == "right-arrow")
+                        {
+                            Debug.Log("jobbra");
+                            //Debug.Log(Ditem.image.name);
+                            controller.Move(true, false, false);
+
+                        }
+                        else if (cycle_draggableItem.image.sprite.name == "down-arrow")
+                        {
+                            Debug.Log("le");
+                            //Debug.Log(Ditem.image.name);
+                            controller.Move(false, true, false);
+                        }
+                    await Task.Delay(1000);
+                    }
+                    Debug.Log(variableI.text);
+                    Debug.Log(compareI.text);
+                    Debug.Log(operationI.text);
+                   
                 }
             }
 
@@ -74,20 +156,20 @@ public class PlayerMovemet : MonoBehaviour
 
                 Debug.Log("fel");
                 //Debug.Log(Ditem.image.name);
-                jump = true;
+                controller.Move(false, false, true);
             }
             else if (main_draggableItem.image.sprite.name == "right-arrow")
             {
                 Debug.Log("jobbra");
                 //Debug.Log(Ditem.image.name);
-                controller.Move(750 * Time.fixedDeltaTime, true, jump);
+                controller.Move(true, false, false);
                
             }
-            else if (main_draggableItem.image.sprite.name == "left-arrow")
+            else if (main_draggableItem.image.sprite.name == "down-arrow")
             {
-                Debug.Log("balra");
+                Debug.Log("le");
                 //Debug.Log(Ditem.image.name);
-                controller.Move(-750 * Time.fixedDeltaTime, false, jump);
+                controller.Move(false, true, false);
             }
             else
             {
@@ -102,13 +184,10 @@ public class PlayerMovemet : MonoBehaviour
 
     private void FixedUpdate()
      {
-        controller.Move(horizontalMove * Time.fixedDeltaTime, false,jump);
-        jump = false;
+       // controller.Move(true, false,jump);
+        ///jump = false;
      }
 
-    [SerializeField] private float speed;
-    //private Rigidbody2D body;
-    //private InventorySlot InventorySlot;
 
 
     private void Awake()
@@ -117,20 +196,5 @@ public class PlayerMovemet : MonoBehaviour
     }
 
 
-
-    /*private void Update()
-    {
-        body.velocity = new Vector2(Input.GetAxis("Horizontal") * speed, body.velocity.y);
-
-        if (Input.GetKey(KeyCode.Space))
-        {
-            body.velocity = new Vector2(body.velocity.x, speed);
-        }
-
-       *//* if(InventorySlot != null)
-        {
-            Debug.Log("KKSDKSAD");
-        }*//*
-    }*/
 
 }

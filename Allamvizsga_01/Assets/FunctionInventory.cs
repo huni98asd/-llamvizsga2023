@@ -5,11 +5,8 @@ using UnityEngine;
 public class FunctionInventory : MonoBehaviour
 {
     public InventorySlot[] inventorySlots;
+    public InventorySlot[] inventorySlots2;
     public GameObject inventoryItemPrefab;
-
-    int selectedSlot = -1;
-
-
   
 
     public bool AddItem(Item item)
@@ -18,6 +15,16 @@ public class FunctionInventory : MonoBehaviour
         for (int i = 0; i < inventorySlots.Length; i++)
         {
             InventorySlot slot = inventorySlots[i];
+            DraggableItem draggableItem = slot.GetComponentInChildren<DraggableItem>();
+            if (draggableItem == null)
+            {
+                SpawnItem(item, slot);
+                return true;
+            }
+        }
+        for (int i = 0; i < inventorySlots2.Length; i++)
+        {
+            InventorySlot slot = inventorySlots2[i];
             DraggableItem draggableItem = slot.GetComponentInChildren<DraggableItem>();
             if (draggableItem == null)
             {
@@ -38,8 +45,14 @@ public class FunctionInventory : MonoBehaviour
     public InventorySlot[] GetSelectedItem()
     {
 
-
         return inventorySlots;
       
     }
+    public InventorySlot[] GetSelectedItem2()
+    {
+
+        return inventorySlots2;
+
+    }
+
 }
