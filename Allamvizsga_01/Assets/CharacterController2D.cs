@@ -61,7 +61,7 @@ public class CharacterController2D : MonoBehaviour
 	}
 
 	
-	public void Move(bool right, bool down, bool jump)
+	public void Move(bool right, bool down, bool jump,bool climbing)
 	{
 		if (!down)
 		{
@@ -113,6 +113,14 @@ public class CharacterController2D : MonoBehaviour
 				m_firstPositionY = m_firstPositionY + m_movmentY;
 				m_Rigidbody2D.position = new Vector2(m_firstPositionX, m_firstPositionY);
 				
+			};
+			if (climbing == true)
+			{
+
+				m_firstPositionY = m_firstPositionY + m_movmentY*2;
+				m_firstPositionX = m_firstPositionX + m_movmentX;
+				m_Rigidbody2D.position = new Vector2(m_firstPositionX, m_firstPositionY);
+
 			};
 
 			if (down == true)

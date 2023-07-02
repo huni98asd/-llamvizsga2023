@@ -52,19 +52,19 @@ public class PlayerMovemet : MonoBehaviour
                     {
                         Debug.Log("fel");
                         //Debug.Log(Ditem.image.name);
-                        controller.Move(false, false, true);
+                        controller.Move(false, false, true,false);
                     }
                     else if (function_draggableItem.image.sprite.name == "right-arrow")
                     {
                         Debug.Log("jobbra");
                         //Debug.Log(Ditem.image.name);
-                        controller.Move(true, false, false);
+                        controller.Move(true, false, false,false);
                     }
                     else if (function_draggableItem.image.sprite.name == "down-arrow")
                     {
                         Debug.Log("le");
                         //Debug.Log(Ditem.image.name);
-                        controller.Move(false, true, false);
+                        controller.Move(false, true, false, false);
                     }
                     else
                     {
@@ -90,19 +90,19 @@ public class PlayerMovemet : MonoBehaviour
                     {
                         Debug.Log("fel");
                         //Debug.Log(Ditem.image.name);
-                        controller.Move(false, false, true);
+                        controller.Move(false, false, true, false);
                     }
                     else if (function_draggableItem2.image.sprite.name == "right-arrow")
                     {
                         Debug.Log("jobbra");
                         //Debug.Log(Ditem.image.name);
-                        controller.Move(true, false, false);
+                        controller.Move(true, false, false, false);
                     }
                     else if (function_draggableItem2.image.sprite.name == "down-arrow")
                     {
                         Debug.Log("le");
                         //Debug.Log(Ditem.image.name);
-                        controller.Move(false, true, false);
+                        controller.Move(false, true, false, false);
                     }
                     else
                     {
@@ -127,20 +127,20 @@ public class PlayerMovemet : MonoBehaviour
 
                             Debug.Log("fel");
                             //Debug.Log(Ditem.image.name);
-                            controller.Move(false, false, true);
+                            controller.Move(false, false, true, false);
                         }
                         else if (cycle_draggableItem.image.sprite.name == "right-arrow")
                         {
                             Debug.Log("jobbra");
                             //Debug.Log(Ditem.image.name);
-                            controller.Move(true, false, false);
+                            controller.Move(true, false, false, false);
 
                         }
                         else if (cycle_draggableItem.image.sprite.name == "down-arrow")
                         {
                             Debug.Log("le");
                             //Debug.Log(Ditem.image.name);
-                            controller.Move(false, true, false);
+                            controller.Move(false, true, false, false);
                         }
                     await Task.Delay(1000);
                     }
@@ -156,20 +156,29 @@ public class PlayerMovemet : MonoBehaviour
 
                 Debug.Log("fel");
                 //Debug.Log(Ditem.image.name);
-                controller.Move(false, false, true);
+                controller.Move(false, false, true, false);
             }
             else if (main_draggableItem.image.sprite.name == "right-arrow")
             {
                 Debug.Log("jobbra");
                 //Debug.Log(Ditem.image.name);
-                controller.Move(true, false, false);
-               
+                controller.Move(true, false, false, false);
             }
             else if (main_draggableItem.image.sprite.name == "down-arrow")
             {
                 Debug.Log("le");
                 //Debug.Log(Ditem.image.name);
-                controller.Move(false, true, false);
+                controller.Move(false, true, false, false);
+            }
+            else if (main_draggableItem.image.sprite.name == "if")
+            {
+                DraggableItem function_draggableItem = functionInventory_item1[0].GetComponentInChildren<DraggableItem>();
+                Debug.Log(function_draggableItem.image.sprite.name);
+                if (function_draggableItem.image.sprite.name == "2up-arrow")
+                {
+                    controller.Move(false, false, false, true);
+                }
+                
             }
             else
             {
